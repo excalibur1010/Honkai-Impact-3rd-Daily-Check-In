@@ -1,0 +1,39 @@
+name: HoyolabDaily
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 16 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set time zone
+        run: sudo timedatectl set-timezone 'Asia/Shanghai'
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Daily Script
+        env:
+          COOKIE: ${{ secrets.COOKIE }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          OWNER_ID: ${{ secrets.OWNER_ID }}
+          PUSHBULLET_TOKEN: ${{ secrets.PUSHBULLET_TOKEN }}
+        run: |
+          echo ${{ secrets.COOKIE }}
+          python honkai.py

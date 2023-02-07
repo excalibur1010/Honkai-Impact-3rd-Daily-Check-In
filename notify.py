@@ -84,7 +84,8 @@ class Notify(object):
             cust['data'][cust['set_data_desp']] = desp
         elif cust['set_data_title']:
             cust['data'][cust['set_data_title']] = title
-        conf = [cust['url'], cust['data'], 'Custom Notifications', cust['text'], cust['code']]
+        conf = [cust['url'], cust['data'],
+                'Custom Notifications', cust['text'], cust['code']]
         url, data, name, text, code = conf
 
         if cust['method'].upper() == 'GET':
@@ -102,7 +103,8 @@ class Notify(object):
             return False
 
         webhook = DiscordWebhook(url=DISCORD_WEBHOOK)
-        embed = DiscordEmbed(title=f'{text} {status}', description=desp, color='03b2f8')
+        embed = DiscordEmbed(
+            title=f'{text} {status}', description=desp, color='03b2f8')
         webhook.add_embed(embed)
         response = webhook.execute()
         if (response.status_code == 200):
@@ -122,10 +124,11 @@ class Notify(object):
         if self.PUSH_CONFIG or self.DISCORD_WEBHOOK:
             log.info('Sending push notifications...')
             self.custPush(app, status, msg)
-            self.discordWebhook(app, status, msg)
+            # self.discordWebhook(app, status, msg)
         else:
             log.info('No social media notifications configured to be sent.')
 
 
 if __name__ == '__main__':
-    Notify().send(app='Honkai Impact 3rd Check-In Helper', status='Test Run', msg='Testing integration with social media APIs')
+    Notify().send(app='Honkai Impact 3rd Check-In Helper', status='Test Run',
+                  msg='Testing integration with social media APIs')
