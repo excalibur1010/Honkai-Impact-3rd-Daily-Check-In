@@ -121,12 +121,12 @@ class Notify(object):
         if not hide:
             log.info(f'Sign-In result: {status}\n\n{msg}')
 
-        if self.PUSH_CONFIG or self.DISCORD_WEBHOOK:
-            log.info('Sending push notifications...')
-            self.custPush(app, status, msg)
-            # self.discordWebhook(app, status, msg)
-        else:
-            log.info('No social media notifications configured to be sent.')
+        # if self.PUSH_CONFIG or self.DISCORD_WEBHOOK:
+        #     log.info('Sending push notifications...')
+        #     self.custPush(app, status, msg)
+        #     self.discordWebhook(app, status, msg)
+        # else:
+        #     log.info('No social media notifications configured to be sent.')
 
 
 if __name__ == '__main__':

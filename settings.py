@@ -15,6 +15,7 @@ logging.basicConfig(
 
 log = logger = logging
 
+
 class _Config:
     GIH_VERSION = 'No one cares about the version anyways'
     LOG_LEVEL = logging.INFO
@@ -23,11 +24,16 @@ class _Config:
     # HoYoLAB
     LANG = 'en-us'
     OS_ACT_ID = 'e202110291205111'
-    OS_REFERER_URL = 'https://act.hoyolab.com/bbs/event/signin-bh3/index.html?act_id={}'.format(OS_ACT_ID)
-    OS_REWARD_URL = 'https://sg-public-api.hoyolab.com/event/mani/home?lang={}&act_id={}'.format(LANG, OS_ACT_ID)
-    OS_ROLE_URL = 'https://api-os-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz={}'.format('bh3_global')
-    OS_INFO_URL = 'https://sg-public-api.hoyolab.com/event/mani/info?lang={}&act_id={}'.format(LANG, OS_ACT_ID)
-    OS_SIGN_URL = 'https://sg-public-api.hoyolab.com/event/mani/sign?lang={}'.format(LANG)
+    OS_REFERER_URL = 'https://act.hoyolab.com/bbs/event/signin-bh3/index.html?act_id={}'.format(
+        OS_ACT_ID)
+    OS_REWARD_URL = 'https://sg-public-api.hoyolab.com/event/mani/home?lang={}&act_id={}'.format(
+        LANG, OS_ACT_ID)
+    OS_ROLE_URL = 'https://api-os-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz={}'.format(
+        'bh3_global')
+    OS_INFO_URL = 'https://sg-public-api.hoyolab.com/event/mani/info?lang={}&act_id={}'.format(
+        LANG, OS_ACT_ID)
+    OS_SIGN_URL = 'https://sg-public-api.hoyolab.com/event/mani/sign?lang={}'.format(
+        LANG)
     WB_USER_AGENT = 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E150'
 
 
@@ -41,12 +47,12 @@ class HttpRequest(object):
         return json.dumps(obj, indent=4, ensure_ascii=False)
 
     def request(self, method, url, max_retry: int = 2,
-            params=None, data=None, json=None, headers=None, **kwargs):
+                params=None, data=None, json=None, headers=None, **kwargs):
         for i in range(max_retry + 1):
             try:
                 s = requests.Session()
                 response = s.request(method, url, params=params,
-                    data=data, json=json, headers=headers, **kwargs)
+                                     data=data, json=json, headers=headers, **kwargs)
                 # print("Request Headers: ", response.request.headers)
                 # print("Response Headers: ", response.headers)
                 # print("Response Content: ", response.content)
