@@ -26,6 +26,8 @@ if __name__ == '__main__':
     token = ''
     cookie_list = []
 
+    print(os.environ.get('OS_COOKIE'))
+
     if os.environ.get('OS_COOKIE') != '':
         OS_COOKIE = os.environ.get('OS_COOKIE')
     else:
